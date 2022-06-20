@@ -60,7 +60,7 @@ class MyHomePage extends StatelessWidget {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          model.incrementCounter(5);
+          model.counterInput.add(5);
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -72,8 +72,12 @@ class MyHomePage extends StatelessWidget {
 class AppBlocModel {
   final StreamController<int> _counterStreamController =
       StreamController.broadcast();
+  final StreamController<int> _counterInputController =
+      StreamController.broadcast();
 
   Stream<int> get counterSream => _counterStreamController.stream;
+  Sink<int> get counterInput => _counterInputController.sink;
+
   int get counter => _counter;
   int _counter = 0;
 
@@ -81,9 +85,13 @@ class AppBlocModel {
     _counterStreamController.onListen = () {
       _counterStreamController.add(_counter);
     };
+
+    _counterInputController.stream.listen((event) {
+      _incrementCounter(event);
+    });
   }
 
-  incrementCounter(int value) {
+  _incrementCounter(int value) {
     _counter += value;
     _counterStreamController.add(_counter);
   }
