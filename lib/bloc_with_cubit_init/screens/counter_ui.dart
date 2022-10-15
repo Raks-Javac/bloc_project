@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
     final blocInjection = BlocProvider.of<CounterCubit>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bloc Sample with StreamController'),
+        title: const Text('Cubit and BlocProvider'),
       ),
       body: Center(
         child: Column(
