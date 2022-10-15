@@ -1,4 +1,5 @@
 import 'package:bloc_project/bloc_with_cubit_init/cubit/counter_cubit_cubit.dart';
+import 'package:bloc_project/bloc_with_cubit_init/screens/other_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +38,28 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cubit and BlocProvider'),
       ),
-      body: BlocBuilder<CounterCubit, CounterCubitState>(
+      body: BlocListener<CounterCubit, CounterCubitState>(
+          listener: (BuildContext context, CounterCubitState state) {
+        //listens to state and perform the actions in the bloc based on the bloc
+        switch (state.counter) {
+          case -1:
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: 200,
+                    child: Text("Hi ,This is moving into negative integers"),
+                  );
+                });
+            break;
+          case 5:
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => OtherPage())));
+            break;
+          default:
+            null;
+        }
+      }, child: BlocBuilder<CounterCubit, CounterCubitState>(
         builder: (context, state) {
           return Center(
             child: Column(
@@ -54,13 +76,14 @@ class MyHomePage extends StatelessWidget {
             ),
           );
         },
-      ),
+      )),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
+              heroTag: "btn2",
               onPressed: () {
                 blocInjection.incrementCounter();
               },
@@ -71,6 +94,7 @@ class MyHomePage extends StatelessWidget {
               width: 3,
             ),
             FloatingActionButton(
+              heroTag: "btn1",
               onPressed: () {
                 blocInjection.deCrementCounter();
               },
