@@ -31,24 +31,29 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //do a dependency injection with bloc
-    final blocInjection = BlocProvider.of<CounterCubit>(context, listen: true);
+    final blocInjection = BlocProvider.of<CounterCubit>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cubit and BlocProvider'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: BlocBuilder<CounterCubit, CounterCubitState>(
+        builder: (context, state) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'You have pushed the button this many times:',
+                ),
+                Text(
+                  '${state.counter}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ],
             ),
-            Text(
-              '${blocInjection.state.counter}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          );
+        },
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
