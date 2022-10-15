@@ -36,13 +36,13 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cubit and BlocProvider'),
+        title: const Text('BlocConsumer'),
       ),
       body: BlocConsumer<CounterCubit, CounterCubitState>(
         listener: (BuildContext context, CounterCubitState state) {
           //listens to state and perform the actions in the bloc based on the bloc
           switch (state.counter) {
-            case -1:
+            case 0:
               showModalBottomSheet(
                   context: context,
                   builder: (context) {
@@ -60,6 +60,15 @@ class MyHomePage extends StatelessWidget {
               null;
           }
         },
+        listenWhen: (previous, current) {
+          //determines whether or not to call [listener] of [BlocConsumer] with the current state
+          if (previous == -1) {
+            //this means it wont run the listener builder block when its 1 and wont show the bottom sheet
+            return false;
+          }
+          return true;
+        },
+        
         builder: (context, state) {
           //rebuilds the ui based on state and user interaction
           return Center(
