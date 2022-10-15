@@ -9,6 +9,7 @@ class CounterCubit extends Cubit<CounterCubitState> {
 //this increments the counter state with only the value passed in the cubitstate in copywith
   void incrementCounter() {
     final newState = state.copyWith(counter: state.counter + 1);
+    print(newState);
     emit(newState);
   }
 
