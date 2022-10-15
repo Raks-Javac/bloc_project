@@ -2,8 +2,11 @@ import 'package:bloc_project/bloc_with_cubit_init/cubit/counter_cubit_cubit.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BlockStarterSampleApp extends StatelessWidget {
-  const BlockStarterSampleApp({Key? key}) : super(key: key);
+// void main() {
+//   runApp(BlockStageThreeApp());
+// }
+class BlockStageThreeApp extends StatelessWidget {
+  const BlockStageThreeApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
