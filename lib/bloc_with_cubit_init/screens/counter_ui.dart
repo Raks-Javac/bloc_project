@@ -38,29 +38,30 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cubit and BlocProvider'),
       ),
-      body: BlocListener<CounterCubit, CounterCubitState>(
-          listener: (BuildContext context, CounterCubitState state) {
-        //listens to state and perform the actions in the bloc based on the bloc
-        switch (state.counter) {
-          case -1:
-            showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Container(
-                    height: 200,
-                    child: Text("Hi ,This is moving into negative integers"),
-                  );
-                });
-            break;
-          case 5:
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => OtherPage())));
-            break;
-          default:
-            null;
-        }
-      }, child: BlocBuilder<CounterCubit, CounterCubitState>(
+      body: BlocConsumer<CounterCubit, CounterCubitState>(
+        listener: (BuildContext context, CounterCubitState state) {
+          //listens to state and perform the actions in the bloc based on the bloc
+          switch (state.counter) {
+            case -1:
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      height: 200,
+                      child: Text("Hi ,This is moving into negative integers"),
+                    );
+                  });
+              break;
+            case 5:
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => OtherPage())));
+              break;
+            default:
+              null;
+          }
+        },
         builder: (context, state) {
+          //rebuilds the ui based on state and user interaction
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +77,7 @@ class MyHomePage extends StatelessWidget {
             ),
           );
         },
-      )),
+      ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
