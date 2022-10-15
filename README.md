@@ -14,3 +14,6 @@ This projects demonstrates how you can manage the state of your app with DTos co
 - bloc_stage_five branch : BlocListener(to listen to state only in UI and runs block on state)  has a buildWhen method which returns a bool of when to listen
 
 - bloc_stage_six branch : BlocConsumer which is the combination of bloc listeners and bloc builders which has the listenWhen and buildWhen function too
+
+
+- bloc_stage_seven branch : BuildContext extension
