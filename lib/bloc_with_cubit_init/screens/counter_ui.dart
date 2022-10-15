@@ -36,35 +36,44 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bloc Sample with StreamController'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'You have pushed the button this many times:',
-          ),
-          Text(
-            '${blocInjection.state.counter}',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '${blocInjection.state.counter}',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
       ),
-      floatingActionButton: Row(
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              blocInjection.incrementCounter();
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              blocInjection.deCrementCounter();
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.remove),
-          ),
-        ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                blocInjection.incrementCounter();
+              },
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            ),
+            SizedBox(
+              width: 3,
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                blocInjection.deCrementCounter();
+              },
+              tooltip: 'Increment',
+              child: const Icon(Icons.remove),
+            ),
+          ],
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
